@@ -1,0 +1,15 @@
+/*
+ SmartMenus jQuery Plugin Bootstrap Addon - v0.3.1 - November 1, 2016
+ http://www.smartmenus.org/
+
+ Copyright Vasil Dinkov, Vadikom Web Ltd.
+ http://vadikom.com
+
+ Licensed MIT
+*/
+(function(a){"function"===typeof define&&define.amd?define(["jquery","jquery.smartmenus"],a):"object"===typeof module&&"object"===typeof module.exports?module.exports=a(require("jquery")):a(jQuery)})(function(a){a.extend(a.SmartMenus.Bootstrap={},{keydownFix:!1,init:function(){var f=a("ul.navbar-nav:not([data-sm-skip])");f.each(function(){var b=a(this),c=b.data("smartmenus");if(!c){var g=function(a){var d=c.getViewportWidth();if(d!=h||a)a=b.find(".caret"),c.isCollapsible()?(b.addClass("sm-collapsible"),
+b.is("[data-sm-skip-collapsible-behavior]")||a.addClass("navbar-toggle sub-arrow")):(b.removeClass("sm-collapsible"),b.is("[data-sm-skip-collapsible-behavior]")||a.removeClass("navbar-toggle sub-arrow")),h=d},f=function(){b.find("a.current").parent().removeClass("active");b.find("a.has-submenu").each(function(){var d=a(this);d.dataSM("bs-data-toggle-dropdown")&&d.attr("data-toggle","dropdown").removeDataSM("bs-data-toggle-dropdown");d.dataSM("bs-role-button")&&d.attr("role","button").removeDataSM("bs-role-button")})},
+k=function(){b.find("a.current").parent().addClass("active");b.find("a.has-submenu").each(function(){var d=a(this);d.is('[data-toggle="dropdown"]')&&d.dataSM("bs-data-toggle-dropdown",!0).removeAttr("data-toggle");d.is('[role="button"]')&&d.dataSM("bs-role-button",!0).removeAttr("role")})};b.smartmenus({subMenusSubOffsetX:2,subMenusSubOffsetY:-6,subIndicators:!1,collapsibleShowFunction:null,collapsibleHideFunction:null,rightToLeftSubMenus:b.hasClass("navbar-right"),bottomToTopSubMenus:b.closest(".navbar").hasClass("navbar-fixed-bottom")}).bind({"show.smapi":function(d,
+b){var c=a(b),e=c.dataSM("scroll-arrows");e&&e.css("background-color",a(document.body).css("background-color"));c.parent().addClass("open")},"hide.smapi":function(b,c){a(c).parent().removeClass("open")}});k();c=b.data("smartmenus");c.isCollapsible=function(){return!/^(left|right)$/.test(this.$firstLink.parent().css("float"))};c.refresh=function(){a.SmartMenus.prototype.refresh.call(this);k();g(!0)};c.destroy=function(b){f();a.SmartMenus.prototype.destroy.call(this,b)};b.is("[data-sm-skip-collapsible-behavior]")&&
+b.bind({"click.smapi":function(b,f){if(c.isCollapsible()){var d=a(f),e=d.parent().dataSM("sub");if(e&&e.dataSM("shown-before")&&e.is(":visible"))return c.itemActivate(d),c.menuHide(e),!1}}});var h;g();a(window).bind("resize.smartmenus"+c.rootId,g)}});if(f.length&&!a.SmartMenus.Bootstrap.keydownFix){a(document).off("keydown.bs.dropdown.data-api",".dropdown-menu");if(a.fn.dropdown&&a.fn.dropdown.Constructor)a(document).on("keydown.bs.dropdown.data-api",'.dropdown-menu:not([id^="sm-"])',a.fn.dropdown.Constructor.prototype.keydown);
+a.SmartMenus.Bootstrap.keydownFix=!0}}});a(a.SmartMenus.Bootstrap.init);return a});
